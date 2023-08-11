@@ -27,7 +27,11 @@ def create_commission_df(deals_df, products_df):
     Args:
         deals_df (dataframe): Dataframe created from deals.json.
         products_df (dataframe): Dataframe created from products.json.
+    Returns:
+        dataframe: A dataframe object that joins deals_df and products_df on product_id and id 
+        to be able to create a new column to calculate commission based on the formula: 
 
+        commission = quantity_products_sold (from Deals) * product_amount (from Products) * commission_rate (from Products)
     """
 
     c_df = deals_df.merge(products_df, left_on='product_id', right_on='id', how='inner', suffixes=('','_drop'))
@@ -38,19 +42,23 @@ def create_commission_df(deals_df, products_df):
     
 def calculate_commission(sales_rep_name, start_date, end_date, commission_df):
     """
-    Function to calculate commission for a sales rep in a given time period and print result.
+    Function to calculate commission for a sales rep in a given time period and print and return result.
 
     Args:
         sales_rep_name (str): Name of the sales rep to calculate commission for.
         start_date (str): Starting date for the date range where commissions will be valid.
         end_date (str): Ending date for the date range where commissions will be valid.
-
+        commission_df (dataframe): Dataframe containing relevant commissions data.
+    Returns:
+        float: A single float value for total commission amount based on the input criteria. e.g. 749.48
     """
 
     rep_df = commission_df[(commission_df['sales_rep_name'].str.contains(sales_rep_name)) & ((commission_df['date'] > start_date) & (commission_df['date'] <= end_date))]
 
-    total_commission = rep_df['commission'].sum()
+    total_commission = round(rep_df['commission'].sum(), digits=2)
     print("{} earned ${:.2f} in commission between {} and {}.".format(sales_rep_name, total_commission, start_date, end_date))
+
+    return total_commission
 
 def main():
 
