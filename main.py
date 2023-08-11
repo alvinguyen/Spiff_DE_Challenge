@@ -7,7 +7,7 @@ products_path = "data/products.json"
 
 def read_json_data(file_path):
     """
-    Function/method to convert json data into dataframe.
+    Function to convert json data into dataframe.
 
     Args:
         file_path (str): Name of file or path to file.
@@ -22,7 +22,7 @@ def read_json_data(file_path):
 
 def create_commission_df(deals_df, products_df):
     """
-    Function/method to create commission dataframe from deals dataframe and products dataframe.
+    Function to create commission dataframe from deals dataframe and products dataframe.
 
     Args:
         deals_df (dataframe): Dataframe created from deals.json.
@@ -38,7 +38,7 @@ def create_commission_df(deals_df, products_df):
     
 def calculate_commission(sales_rep_name, start_date, end_date, commission_df):
     """
-    Function/method to calculate commission for a sales rep in a given time period and print result.
+    Function to calculate commission for a sales rep in a given time period and print result.
 
     Args:
         sales_rep_name (str): Name of the sales rep to calculate commission for.
