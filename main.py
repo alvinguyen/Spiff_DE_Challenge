@@ -55,7 +55,7 @@ def calculate_commission(sales_rep_name, start_date, end_date, commission_df):
 
     rep_df = commission_df[(commission_df['sales_rep_name'].str.contains(sales_rep_name)) & ((commission_df['date'] > start_date) & (commission_df['date'] <= end_date))]
 
-    total_commission = round(rep_df['commission'].sum(), digits=2)
+    total_commission = round(rep_df['commission'].sum(), ndigits=2)
     print("{} earned ${:.2f} in commission between {} and {}.".format(sales_rep_name, total_commission, start_date, end_date))
 
     return total_commission
